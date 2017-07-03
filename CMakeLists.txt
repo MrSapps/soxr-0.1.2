@@ -271,30 +271,31 @@ endif ()
 
 
 # Deinstallation:
+if (SOXR_INSTALLER)
+    configure_file (
+      "${CMAKE_CURRENT_SOURCE_DIR}/deinstall.cmake.in"
+      "${CMAKE_CURRENT_BINARY_DIR}/deinstall.cmake"
+      IMMEDIATE @ONLY)
 
-configure_file (
-  "${CMAKE_CURRENT_SOURCE_DIR}/deinstall.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/deinstall.cmake"
-  IMMEDIATE @ONLY)
-
-add_custom_target (deinstall
-  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/deinstall.cmake")
+    add_custom_target (deinstall
+      COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/deinstall.cmake")
 
 
 
-# Packaging:
+    # Packaging:
 
-if (UNIX AND SOXR_INSTALLER)
-  set (CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-  set (CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-  set (CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+    if (UNIX AND)
+      set (CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+      set (CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+      set (CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-  set (CPACK_SOURCE_GENERATOR "TGZ")
-  set (CPACK_SOURCE_IGNORE_FILES "dist;/lsr-tests/;/Debug/;/Release/;/cpack/;\\\\.swp$;\\\\.gitignore;/\\\\.git/")
+      set (CPACK_SOURCE_GENERATOR "TGZ")
+      set (CPACK_SOURCE_IGNORE_FILES "dist;/lsr-tests/;/Debug/;/Release/;/cpack/;\\\\.swp$;\\\\.gitignore;/\\\\.git/")
 
-  include (CPack)
+      include (CPack)
 
-  if (IS_DIRECTORY ${PROJECT_SOURCE_DIR}/cpack)
-    add_subdirectory (cpack)
-  endif ()
+      if (IS_DIRECTORY ${PROJECT_SOURCE_DIR}/cpack)
+        add_subdirectory (cpack)
+      endif ()
+    endif ()
 endif ()
