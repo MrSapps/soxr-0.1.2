@@ -34,6 +34,7 @@ if (NOT CMAKE_BUILD_TYPE)
   set (CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif ()
 
+option (SOXR_INSTALLER "Install files."  OFF)
 option (BUILD_TESTS "Build sanity-tests."  ON)
 option (BUILD_SHARED_LIBS "Build shared libraries." ON)
 option (BUILD_EXAMPLES "Build examples." OFF)
@@ -219,12 +220,13 @@ if (BUILD_TESTS OR BUILD_LSR_TESTS)
   enable_testing ()
 endif ()
 
+if (SOXR_INSTALLER)
 install (FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/README
   ${CMAKE_CURRENT_SOURCE_DIR}/LICENCE
   ${CMAKE_CURRENT_SOURCE_DIR}/NEWS
   DESTINATION ${DOC_INSTALL_DIR})
-
+endif()
 
 
 # Subdirectories:
@@ -282,7 +284,7 @@ add_custom_target (deinstall
 
 # Packaging:
 
-if (UNIX)
+if (UNIX AND SOXR_INSTALLER)
   set (CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
   set (CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
   set (CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
