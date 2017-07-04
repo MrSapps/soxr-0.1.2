@@ -35,11 +35,11 @@ if (NOT CMAKE_BUILD_TYPE)
 endif ()
 
 option (SOXR_INSTALLER "Install files."  OFF)
-option (BUILD_TESTS "Build sanity-tests."  ON)
-option (BUILD_SHARED_LIBS "Build shared libraries." ON)
+option (BUILD_TESTS "Build sanity-tests."  OFF)
+option (BUILD_SHARED_LIBS "Build shared libraries." OFF)
 option (BUILD_EXAMPLES "Build examples." OFF)
-option (WITH_OPENMP "Include OpenMP threading." ON)
-option (WITH_LSR_BINDINGS "Include a `libsamplerate'-like interface." ON)
+option (WITH_OPENMP "Include OpenMP threading." OFF)
+option (WITH_LSR_BINDINGS "Include a `libsamplerate'-like interface." OFF)
 cmake_dependent_option (WITH_SINGLE_PRECISION "Build with single precision (for up to 20-bit accuracy)." ON
   "WITH_DOUBLE_PRECISION" ON)
 cmake_dependent_option (WITH_DOUBLE_PRECISION "Build with double precision (for up to 32-bit accuracy)." ON
